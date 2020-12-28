@@ -10,6 +10,7 @@ import { motion } from "framer-motion";
 
 // Components
 import Game from "../components/Game";
+import GameDetail from "../components/GameDetail";
 
 const Home = () => {
     // Fetch Games
@@ -23,6 +24,7 @@ const Home = () => {
 
     return (
         <GameList>
+            <GameDetail />
             <h2>Popular Games</h2>
             <Games>
                 {popular.map((game) => (
