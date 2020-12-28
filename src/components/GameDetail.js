@@ -8,6 +8,8 @@ import { motion } from "framer-motion";
 // Redux
 import { useSelector } from "react-redux";
 
+import { smallImage } from "../util";
+
 const GameDetail = () => {
     // useHistory to manipulate path
     const history = useHistory();
@@ -50,7 +52,7 @@ const GameDetail = () => {
 
                         <Media>
                             <img
-                                src={game.background_image}
+                                src={smallImage(game.background_image, 1280)}
                                 alt={game.background_image}
                             />
                         </Media>
@@ -62,7 +64,7 @@ const GameDetail = () => {
                         <div className="gallery">
                             {screen.results.map((screen) => (
                                 <img
-                                    src={screen.image}
+                                    src={smallImage(screen.image, 1280)}
                                     alt={screen.image}
                                     key={screen.id}
                                 />
