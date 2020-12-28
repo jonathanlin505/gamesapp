@@ -10,6 +10,14 @@ import { useSelector } from "react-redux";
 
 import { smallImage } from "../util";
 
+// Images
+import playstation from "../img/playstation.svg";
+import steam from "../img/steam.svg";
+import xbox from "../img/xbox.svg";
+import nintendo from "../img/nintendo.svg";
+import apple from "../img/apple.svg";
+import gamepad from "../img/gamepad.svg";
+
 const GameDetail = ({ pathID }) => {
     // useHistory to manipulate path
     const history = useHistory();
@@ -24,8 +32,27 @@ const GameDetail = ({ pathID }) => {
         }
     };
 
+    // Platform Image Handler
+    const getPlatform = (platform) => {
+        switch (platform) {
+            case "playstation":
+                return playstation;
+            case "xbox":
+                return xbox;
+            case "steam":
+                return steam;
+            case "nintendo":
+                return nintendo;
+            case "apple":
+                return apple;
+            default:
+                return gamepad;
+        }
+    };
+
     // Data
     const { screen, game, isLoading } = useSelector((state) => state.detail);
+    console.log(game.platforms);
 
     return (
         <>
@@ -44,9 +71,11 @@ const GameDetail = ({ pathID }) => {
                                 <h3>Platforms</h3>
                                 <Platforms>
                                     {game.platforms.map((data) => (
-                                        <h3 key={data.platform.id}>
-                                            {data.platform.name}
-                                        </h3>
+                                        <img
+                                            key={data}
+                                            alt={data}
+                                            src={getPlatform(data)}
+                                        />
                                     ))}
                                 </Platforms>
                             </Info>
@@ -124,7 +153,7 @@ const Stats = styled(motion.div)`
 `;
 
 const Info = styled(motion.div)`
-    text-align: center;
+    text-align: right;
 `;
 
 const Platforms = styled(motion.div)`
