@@ -17,6 +17,8 @@ import xbox from "../img/xbox.svg";
 import nintendo from "../img/nintendo.svg";
 import apple from "../img/apple.svg";
 import gamepad from "../img/gamepad.svg";
+import starEmpty from "../img/star-empty.png";
+import starFull from "../img/star-full.png";
 
 const GameDetail = ({ pathID }) => {
     // useHistory to manipulate path
@@ -30,6 +32,22 @@ const GameDetail = ({ pathID }) => {
             document.body.style.overflow = "auto";
             history.push("/");
         }
+    };
+
+    // Get Stars
+    const getStars = () => {
+        const stars = [];
+        const rating = Math.round(game.rating);
+
+        for (let i = 1; i <= 5; i++) {
+            if (i <= rating) {
+                stars.push(<img alt="star" key={i} src={starFull} />);
+            } else {
+                stars.push(<img alt="star" key={i} src={starEmpty} />);
+            }
+        }
+
+        return stars;
     };
 
     // Platform Image Handler
@@ -52,7 +70,6 @@ const GameDetail = ({ pathID }) => {
 
     // Data
     const { screen, game, isLoading } = useSelector((state) => state.detail);
-    console.log(game.platforms);
 
     return (
         <>
@@ -65,6 +82,7 @@ const GameDetail = ({ pathID }) => {
                                     {game.name}
                                 </motion.h3>
                                 <p>Rating: {game.rating}</p>
+                                {getStars()}
                             </div>
 
                             <Info>
@@ -150,6 +168,12 @@ const Stats = styled(motion.div)`
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    img {
+        width: 2rem;
+        height: 2rem;
+        display: inline;
+    }
 `;
 
 const Info = styled(motion.div)`
